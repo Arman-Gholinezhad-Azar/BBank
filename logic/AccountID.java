@@ -11,6 +11,15 @@ public final class AccountID {
         this.value = Objects.requireNonNull(uuid, "UUID cannot be null!");
     }
 
+    /**
+     * Convenience constructor to support existing code paths that take a string.
+     *
+     * <p>We keep the stricter {@link #fromString(String)} factory for clarity.</p>
+     */
+    public AccountID(String uuid) {
+        this(UUID.fromString(Objects.requireNonNull(uuid, "uuid").trim()));
+    }
+
     public static AccountID generate() {
         return new AccountID(UUID.randomUUID());
     }
